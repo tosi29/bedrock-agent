@@ -33,8 +33,8 @@ data "aws_iam_policy_document" "policy_agents" {
     effect  = "Allow"
     actions = ["bedrock:InvokeModel"]
     resources = [
-      local.claude3_5_sonnet_model_arn,
-      local.claude3_haiku_model_arn
+      data.aws_bedrock_foundation_model.sonnet.model_arn,
+      data.aws_bedrock_foundation_model.haiku.model_arn
     ]
   }
 }
