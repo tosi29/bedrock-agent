@@ -1,19 +1,16 @@
-resource "aws_bedrockagent_agent" "this" {
- agent_name              = "${local.prefix}-agent"
- agent_resource_role_arn = aws_iam_role.agents.arn
- foundation_model        = "anthropic.claude-3-5-sonnet-20240620-v1:0"
- prepare_agent           = true
- instruction             = local.prompt
+module "agent" {
+  source = "./modules/agent"
 }
+
 
 resource "aws_bedrockagent_agent_alias" "this" {
  agent_alias_name = "latest"
- agent_id         = aws_bedrockagent_agent.this.agent_id
+ agent_id         = module.agent.agent_id
 }
 
 resource "aws_bedrockagent_agent_action_group" "this" {
  action_group_name          = "${local.prefix}-agent"
- agent_id                   = aws_bedrockagent_agent.this.agent_id
+ agent_id                   = module.agent.agent_id
  agent_version              = "DRAFT"
  skip_resource_in_use_check = true
  action_group_executor {

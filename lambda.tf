@@ -48,6 +48,6 @@ resource "aws_lambda_permission" "this" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.this.function_name
   principal     = "bedrock.amazonaws.com"
-  source_arn    = "arn:aws:bedrock:${local.region}:${local.account_id}:agent/${aws_bedrockagent_agent.this.id}"
+  source_arn    = "arn:aws:bedrock:${local.region}:${local.account_id}:agent/${module.agent.agent_id}"
 }
 
