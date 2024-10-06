@@ -4,7 +4,7 @@ resource "aws_lambda_function" "this" {
   runtime       = "python3.12"
   role          = var.lambda_role_arn
 
-  handler          = "lambda_function.lambda_handler"
+  handler          = "vacation.lambda_handler"
   filename         = var.lambda_file_name
   source_code_hash = var.lambda_source_code_hash
 
