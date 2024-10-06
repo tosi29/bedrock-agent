@@ -7,6 +7,9 @@ def lambda_handler(event, context):
     function = event['function']
     parameters = event.get('parameters', [])
 
+    print("function", function)
+    print("parameters", parameters)
+
     # Execute your business logic here. For more information, refer to: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html
     responseBody =  {
         "TEXT": {
