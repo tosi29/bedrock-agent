@@ -13,8 +13,13 @@ provider "aws" {
 }
 
 locals {
-  account_id = data.aws_caller_identity.current.account_id
-  region     = data.aws_region.current.name
-
   prefix = "test"
 }
+
+
+data "archive_file" "lambda" {
+  type        = "zip"
+  source_dir  = "lambda/src"
+  output_path = "lambda/lambda_function.zip"
+}
+
