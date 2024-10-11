@@ -23,6 +23,18 @@ module "agent-action-lambda-vacation" {
 }
 
 resource "aws_bedrockagent_agent_alias" "this" {
- agent_alias_name = "latest"
- agent_id         = module.agent.agent_id
+  agent_alias_name = "latest"
+  agent_id         = module.agent.agent_id
+
+  lifecycle {
+    replace_triggered_by = [
+      null_resource.trigger.id
+    ]
+  }
+}
+
+resource "null_resource" "trigger" {
+  triggers = {
+    always_run = timestamp()
+  }
 }
