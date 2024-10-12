@@ -2,6 +2,10 @@ module "agent" {
   source = "./modules/agent"
 }
 
+output "agent_version" {
+  value = module.agent.agent_version
+}
+
 module "agent-action-lambda-datetime" {
   source = "./modules/agent-action-lambda-1"
   agent_id = module.agent.agent_id
