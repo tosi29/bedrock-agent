@@ -26,6 +26,16 @@ module "agent-action-lambda-vacation" {
   prefix = "test-2"
 }
 
+module "agent-action-lambda-aws-cost" {
+  source = "./modules/agent-action-lambda-3"
+  agent_id = module.agent.agent_id
+  lambda_file_name = data.archive_file.lambda.output_path
+  lambda_source_code_hash = data.archive_file.lambda.output_base64sha256
+  lambda_role_arn = aws_iam_role.lambda.arn
+  description = "AWSの利用にかかっている料金を取得できる関数です"
+  prefix = "test-3"
+}
+
 resource "aws_bedrockagent_agent_alias" "this" {
   agent_alias_name = "latest"
   agent_id         = module.agent.agent_id
